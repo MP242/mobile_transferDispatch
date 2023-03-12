@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -9,7 +9,7 @@ type Props = {price: number, name: string, location: string}
 
 const Card = (props: Props) => {
     const navigation = useNavigation();
-    const {price, name,location} = props;
+    const {price, name,location} = props.card;
   return (
     <View style={styles.cardContainer} onPress={() => navigation.navigate('Account')}>
         <View style={styles.cardHeader}>
@@ -56,8 +56,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor:'#2D2B2B',
 
-        width:'90%',
+        width:Dimensions.get('window').width - 30,
         borderRadius:30,
+        marginTop:20,
+        marginBottom:20,
     },
     cardHeader: {
         // backgroundColor:'red',
