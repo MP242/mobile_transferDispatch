@@ -2,6 +2,7 @@ import { Button, ImageBackground, StatusBar, StyleSheet, Text, View } from 'reac
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import Card from '../../components/Card';
 
 
 type Props = {}
@@ -14,13 +15,7 @@ const Home = (props: Props) => {
     <View style={styles.container}>
       <StatusBar barStyle='light-content'/>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground>
-      <Text style={styles.text}>Home</Text>
-      <Text style={styles.text}>test</Text>
-      <Button title='Go détails'
-      onPress={() => navigation.navigate('Account')}
-      />
-      <Icon name="home"  style={{ color:'red', fontSize:50 }} />
-      <Text style={styles.text}>test2</Text>
+      <Card name={"Paul B"} price={400} location={"Cannes"}  />
 
     </View>
   )
