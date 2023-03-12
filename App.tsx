@@ -49,11 +49,14 @@ function App(): JSX.Element {
       }}> */}
       <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerTransparent: true,
+        // headerTransparent: true,
+        //couleur du header
+        headerStyle: {backgroundColor: '#1F1F1F'},
         headerTitleStyle: {color: 'white'},
         headerTintColor: 'white',
         tabBarStyle:{
-          backgroundColor: 'transparent',
+          backgroundColor: '#1F1F1F',
+          // backgroundColor: 'transparent',
           borderTopWidth: 1,
           borderTopColor: 'white',
           position: 'absolute',
