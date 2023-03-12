@@ -5,6 +5,10 @@ import AccountScreen from './screens/Account/Account';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
 function HomeScreen2() {
   return (
     <SafeAreaView>
@@ -23,27 +27,40 @@ const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
 
   return (
-  
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home"
+      <Tab.Navigator  
       screenOptions={{
         headerTransparent: true,
         headerTitleStyle: {color: 'white'},
         headerTintColor: 'white',
-        // headerShown: false
-        // headerStyle: {
-        //   backgroundColor: 'transparent',
-        //   transparent: true,         
-        // },
-        // headerTintColor: '#fff',
-        // headerTitleStyle: {
-        //   fontWeight: 'bold',
-        // },
-      }}>  
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Account" component={AccountScreen} />
-      </Stack.Navigator>
+        tabBarStyle:{
+          backgroundColor: 'transparent',
+          borderTopWidth: 2,
+          position: 'absolute',
+          height: 100          
+        },
+        tabBarItemStyle:{
+          backgroundColor:'transparent',
+          margin:9,
+          borderRadius:10,
+        }
+      }}>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Account" component={AccountScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName="Home"
+    //   screenOptions={{
+    //     headerTransparent: true,
+    //     headerTitleStyle: {color: 'white'},
+    //     headerTintColor: 'white',
+    //   }}>  
+    //     <Stack.Screen name="Home" component={HomeScreen} />
+    //     <Stack.Screen name="Account" component={AccountScreen} />
+    //   </Stack.Navigator>
+      
+    // </NavigationContainer>
     
   );
 }
