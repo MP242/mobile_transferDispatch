@@ -9,11 +9,11 @@ type Props = {price: number, name: string, location: string}
 
 const Card = (props: Props) => {
     const navigation = useNavigation();
-    const {price, name,location} = props.card;
+    const {price, user_name,location,likes,missionComments,start_date,end_date} = props.card;
   return (
-    <View style={styles.cardContainer} onPress={() => navigation.navigate('Account')}>
+    <View style={styles.cardContainer}>
         <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>{name}</Text>
+            <Text style={styles.cardHeaderText}>{user_name}</Text>
             <Text style={styles.cardHeaderText}> image</Text>
         </View>
         <View style={styles.cardBody}>
@@ -25,20 +25,20 @@ const Card = (props: Props) => {
             <View style={styles.cardBodyLoc}>
                 <Icon  name="map-pin" size={18} color="white" />
                 <Text style={styles.cardBodyLocText}>Du </Text>            
-                <Text style={styles.cardBodyLocText}>10/02/2023</Text>            
+                <Text style={styles.cardBodyLocText}>{start_date}</Text>            
                 <Text style={styles.cardBodyLocText}> au </Text>            
-                <Text style={styles.cardBodyLocText}>15/02/2023 </Text>            
+                <Text style={styles.cardBodyLocText}>{end_date} </Text>            
             </View>
         </View>
         <Text style={styles.text}>{price} $</Text>
         <View style={styles.likesComments}>
             <View style={styles.likes}>
                 <AntDesign style={styles.Icon} name="hearto" size={18} color="white" />
-                <Text style={styles.cardBodyLocText}> 2 </Text>
+                <Text style={styles.cardBodyLocText}> {likes.length} </Text>
             </View>
             <View style={styles.likes}>
                 <FontAwesome5 style={styles.Icon} name="comment" size={18} color="white" />
-                <Text style={styles.cardBodyLocText}> 2 </Text>
+                <Text style={styles.cardBodyLocText}> {missionComments.length} </Text>
             </View>
         </View>
         <Button title='Détails'
