@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,14 +29,15 @@ function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator  
+      {/* <Tab.Navigator  
       screenOptions={{
         headerTransparent: true,
         headerTitleStyle: {color: 'white'},
         headerTintColor: 'white',
         tabBarStyle:{
           backgroundColor: 'transparent',
-          borderTopWidth: 2,
+          borderTopWidth: 1,
+          borderTopColor: 'white',
           position: 'absolute',
           height: 100          
         },
@@ -44,10 +46,49 @@ function App(): JSX.Element {
           margin:9,
           borderRadius:10,
         }
-      }}>
+      }}> */}
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerTransparent: true,
+        headerTitleStyle: {color: 'white'},
+        headerTintColor: 'white',
+        tabBarStyle:{
+          backgroundColor: 'transparent',
+          borderTopWidth: 1,
+          borderTopColor: 'white',
+          position: 'absolute',
+          height: 100          
+        },
+        tabBarItemStyle:{
+          backgroundColor:'transparent',
+          margin:9,
+          borderRadius:10,
+        },
+        tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            switch (route.name) {
+                case 'Home':
+                    iconName = 'home';
+                    break;
+                case 'Messages':
+                    iconName = 'message-circle';
+                    break;
+                case 'Account':
+                    iconName = 'user';
+                    break;
+                default:
+                    break;
+            }
+            // return <Ionicons name={iconName} size={size} color={color} />;
+            // return <LottieView source={filePath} loop={false} autoPlay={focused} />;
+            return <Icon name={iconName} size={size} color={color} />;
+        },
+    })}
+    >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Account" component={AccountScreen} />
-      </Tab.Navigator>
+      </Tab.Navigator> 
     </NavigationContainer>
     // <NavigationContainer>
     //   <Stack.Navigator initialRouteName="Home"
