@@ -14,6 +14,7 @@ const Home = (props: Props) => {
       <StatusBar barStyle='light-content'/>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground>
       <Text style={styles.text}>Home</Text>
+      <Text style={styles.text}>test</Text>
       <Button title='Go détails'
       onPress={() => navigation.navigate('Account')}
       />
