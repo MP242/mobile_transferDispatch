@@ -1,6 +1,8 @@
 import { Button, ImageBackground, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
+
 
 type Props = {}
 
@@ -17,6 +19,8 @@ const Home = (props: Props) => {
       <Button title='Go détails'
       onPress={() => navigation.navigate('Account')}
       />
+      <Icon name="home"  style={{ color:'red', fontSize:50 }} />
+      <Text style={styles.text}>test2</Text>
 
     </View>
   )
