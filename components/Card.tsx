@@ -5,11 +5,12 @@ import Icon from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-type Props = {price: number, name: string, location: string}
+type Props = {price: number, user_name: string, location: string, likes: string[], missionComments: string[], start_date: string, end_date: string}
+
 
 const Card = (props: Props) => {
     const navigation = useNavigation();
-    const {price, user_name,location,likes,missionComments,start_date,end_date} = props.card;
+    const {price, user_name,location,likes,missionComments,start_date,end_date} = props;
   return (
     <View style={styles.cardContainer}>
         <View style={styles.cardHeader}>
@@ -42,7 +43,7 @@ const Card = (props: Props) => {
             </View>
         </View>
         <Button title='Détails'
-        onPress={() => navigation.navigate('Account')}
+        onPress={() => navigation.navigate({ name: 'Account' })}
         />
     </View>
   )

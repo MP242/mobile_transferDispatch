@@ -1,57 +1,63 @@
-import { Button, FlatList, ImageBackground, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Button, FlatList, ImageBackground, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useEffect }  from 'react'
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
-import Card from '../../components/Card';
-
+import CardItem from '../../components/Card';
 
 type Props = {}
 
-// const DATA = [
-//   {
-//     price: 400,
-//     name: 'First Item',
-//     lcoation:'Cannes',
-//   },
-//   {
-//     price: 400,
-//     name: 'First Item',
-//     lcoation:'Cannes',
-//   },
-//   {
-//     price: 400,
-//     name: 'Paul',
-//     lcoation:'Cannes',
-//   },
- 
-// ];
-
 const Home = (props: Props) => {
-  const [DATA, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [DATA, setData] = useState([]);
   const navigation = useNavigation();
   const image = {uri: '/Users/marco/TransferDispatch/assets/background.png'};
 
+  const getCard = async () => {
+    try {
+      const response = await fetch('https://transferdispatchapi.herokuapp.com/api/missions');
+      const json = await response.json();
+      setData(json.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch('https://transferdispatchapi.herokuapp.com/api/missions', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => console.error(error))
+    getCard();
   }, []);
 
+  interface MyDataItem {
+    _id: string;
+    mission_content: string;
+    user_id: string;
+    user_name: string;
+    price: number;
+    location: string;
+    start_date: string;
+    end_date: string;
+    likes: string[];
+    missionComments: string[];
+  }
+  
+  const renderItem = ({ item }: { item: MyDataItem }) => (    
+    <CardItem {...item} />
+  );
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle='light-content'/>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground>
-      <FlatList style={styles.flat} data={DATA.data}
-        renderItem={({item}) => <Card card={item} />} >
-      </FlatList>
-
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (        
+        <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item._id}
+        style={styles.flat}
+        />        
+      )}
     </View>
   )
 }
